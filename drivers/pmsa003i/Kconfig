@@ -1,0 +1,8 @@
+# Create a new option in menuconfig
+config PMSA003I
+	bool "PMSA003I Particulate Matter Sensor"
+	default n  		# Set the driver to be disabled by default
+	depends on I2C  # Make it dependent on I2C
+	help
+	  Enable driver for the PMSA003I particulate matter sensor. This driver
+	  depends on the I2C subsystem being enabled.

@@ -1,0 +1,11 @@
+manifest:
+  projects:
+    - name: zephyr
+      revision: main
+      url: https://github.com/zephyrproject-rtos/zephyr
+      import: true
+    - name: pmsa003i-driver
+      path: drivers/pmsa003i
+      revision: main
+  self:
+    path: modules/lib/note-zephyr

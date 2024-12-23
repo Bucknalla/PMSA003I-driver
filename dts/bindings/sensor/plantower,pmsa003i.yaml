@@ -1,0 +1,18 @@
+# Description of the device
+description: Plantower PMSA003I particulate matter sensor
+
+# Compatibility string that matches the one in the Devicetree source and 
+# DT_DRV_COMPAT macro in the driver source code
+compatible: "plantower,pmsa003i"
+
+# Includes common definitions from other bindings files
+#  - sensor-device.yaml - common sensor properties
+#  - i2c-device.yaml - common I2C communication properties
+include: [sensor-device.yaml, i2c-device.yaml]
+
+# Defines specific Devicetree properties of the PMSA003I sensor
+properties:
+  i2c-address:
+    type: int
+    default: 0x12
+    description: I2C address of the PMSA003I sensor

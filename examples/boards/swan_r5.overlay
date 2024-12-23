@@ -1,0 +1,17 @@
+// Enable I2C0 and add MCP9808 sensor
+/ {
+    aliases {
+        airquality = &pmsa003i;
+    };
+};
+
+&feather_i2c {
+    status = "okay"; 										// Enable I2C interface
+
+	// Label: name of our device node
+    pmsa003i: pmsa003i@12 {
+        compatible = "plantower,pmsa003i"; 					// Specify device bindings/driver
+        reg = <0x12>; 										// I2C address of the PMSA003I
+        status = "okay"; 									// Enable the PMSA003I sensor
+    };
+};
