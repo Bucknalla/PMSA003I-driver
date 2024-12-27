@@ -66,7 +66,7 @@ static int pmsa003i_read_with_timeout(const struct pmsa003i_config *cfg, uint8_t
 // Public functions (API)
 
 // Read temperature value from the device and store it in the device data struct
-// Call this before calling mcp9808_channel_get()
+// Call this before calling pmsa003i_channel_get()
 static int pmsa003i_sample_fetch(const struct device *dev,
 								enum sensor_channel chan)
 {
@@ -151,7 +151,7 @@ static const struct sensor_driver_api pmsa003i_api_funcs = {
 
 // Expansion macro to define the driver instances
 // If inst is set to "42" by the Devicetree compiler, this macro creates code
-// with the unique id of "42" for the structs, e.g. mcp9808_data_42.
+// with the unique id of "42" for the structs, e.g. pmsa003i_data_42.
 #define PMSA003I_DEFINE(inst)                                        		   \
 																			   \
 	/* Create an instance of the data struct */								   \
