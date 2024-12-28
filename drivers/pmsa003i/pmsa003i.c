@@ -7,7 +7,6 @@
 
 #include "pmsa003i.h"
 
-// Enable logging at a given level
 LOG_MODULE_REGISTER(PMSA003I, CONFIG_SENSOR_LOG_LEVEL);
 
 static int pmsa003i_init(const struct device *dev);
@@ -44,7 +43,7 @@ static uint8_t pmsa003i_calculate_checksum(uint8_t *buf) {
 
 static int pmsa003i_read_with_timeout(const struct pmsa003i_config *cfg, uint8_t *buf, size_t len) {
     int64_t start_time = k_uptime_get();
-    int64_t timeout_ms = 1000;
+    int64_t timeout_ms = CFG_PMSA003I_SERIAL_TIMEOUT;
 
     while (k_uptime_get() - start_time < timeout_ms) {
         int ret = i2c_read_dt(&cfg->i2c, buf, len);
@@ -97,11 +96,11 @@ static int pmsa003i_sample_fetch(const struct device *dev,
     }
 
 	drv_data->pm_1_0 =
-	    (pmsa003i_read_buffer[4] << 8) + pmsa003i_read_buffer[5];
+	    (pmsa003i_read_buffer[PMSA003I_REG_PM_1_0] << 8) + pmsa003i_read_buffer[PMSA003I_REG_PM_1_0 + 1];
 	drv_data->pm_2_5 =
-	    (pmsa003i_read_buffer[6] << 8) + pmsa003i_read_buffer[7];
+	    (pmsa003i_read_buffer[PMSA003I_REG_PM_2_5] << 8) + pmsa003i_read_buffer[PMSA003I_REG_PM_2_5 + 1];
 	drv_data->pm_10 =
-	    (pmsa003i_read_buffer[8] << 8) + pmsa003i_read_buffer[9];
+	    (pmsa003i_read_buffer[PMSA003I_REG_PM_10] << 8) + pmsa003i_read_buffer[PMSA003I_REG_PM_10 + 1];
 
 	LOG_DBG("pm1.0 = %d", drv_data->pm_1_0);
 	LOG_DBG("pm2.5 = %d", drv_data->pm_2_5);
